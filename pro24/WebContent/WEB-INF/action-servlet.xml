@@ -17,7 +17,7 @@
       <property name="viewClass" 
                           value="org.springframework.web.servlet.view.JstlView"/>
                           <!-- 230913 변경함 -->
-      <property name="prefix" value="/WEB-INF/views/member_lsy0913/" /> 
+      <property name="prefix" value="/WEB-INF/views/member_kmk0913/" /> 
       <property name="suffix" value=".jsp"/>
    </bean>
    
@@ -25,7 +25,7 @@
    실제 작업은 본인이 안하고, 다 외주를 줍니다. 분업화를 하는 것, 느슨한 결합을 함.  -->
        <!-- 230913 변경함 -->
    <bean id="memberController" 
-                            class="com.spring.member.controller.lsy0913.MemberControllerImpl">
+                            class="com.spring.member.controller.kmk0913.MemberControllerImpl">
       <property name="methodNameResolver">
          <ref local="memberMethodResolver"/>
       </property>
@@ -41,6 +41,7 @@
           <prop key="/member/addMember.do" >addMember</prop>
           <prop key="/member/removeMember.do">removeMember</prop>
           <prop key="/member/memberForm.do" >form</prop>
+          <prop key="/member/modMember.do" >modMember</prop>
        </props>
       </property>
    </bean>

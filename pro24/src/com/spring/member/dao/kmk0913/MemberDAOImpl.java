@@ -1,4 +1,4 @@
-package com.spring.member.dao.lsy0913;
+package com.spring.member.dao.kmk0913;
 
 import java.util.List;
 
@@ -27,6 +27,18 @@ public class MemberDAOImpl implements MemberDAO {
 		// 동네 4번, 디비 갔다가 돌와 온 결과. 
 		return membersList;
 	}
+	
+	@Override
+	public MemberVO selectOneMember(String id) throws DataAccessException {
+		 MemberVO membervo = null;
+		 membervo = (MemberVO) sqlSession.selectOne("mapper.member.selectMemberById", id);
+		return membervo;
+	}
+	@Override
+	public int updateMember(MemberVO memberVO) throws DataAccessException {
+		int result = sqlSession.update("mapper.member.updateMember", memberVO);
+		return result;
+	}
 
 	@Override
 	public int insertMember(MemberVO memberVO) throws DataAccessException {
@@ -39,4 +51,6 @@ public class MemberDAOImpl implements MemberDAO {
 		int result =  sqlSession.delete("mapper.member.deleteMember", id);
 		return result;
 	}
+
+	
 }

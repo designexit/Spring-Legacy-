@@ -1,12 +1,12 @@
-package com.spring.member.service.lsy0913;
+package com.spring.member.service.kmk0913;
 
 import java.util.List;
 
 import org.springframework.dao.DataAccessException;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-// 경로 변경
-import com.spring.member.dao.lsy0913.MemberDAO;
+
+import com.spring.member.dao.kmk0913.MemberDAO;
 import com.spring.member.vo.MemberVO;
 
 /*@Transactional(propagation=Propagation.REQUIRED) */
@@ -29,6 +29,19 @@ public class MemberServiceImpl  implements MemberService{
 	      // 동네 3번 , 4번, DB 찍고 돌아 옴. 
 	      return membersList;
 	   }
+	// 한 회원의 정보 가져오기 추가 부분. 
+	   @Override
+		public MemberVO getOneMember(String id) throws DataAccessException {
+		   MemberVO membervo = null;
+		   // 실제 작업, 동네 3번, dao 외주 주기. 
+		   membervo = memberDAO.selectOneMember(id);
+			return membervo;
+		}
+	   
+	   @Override
+		public int updateMember(MemberVO memberVO) throws DataAccessException {
+		   return memberDAO.updateMember(memberVO);
+		}
 
 	   @Override
 	   public int addMember(MemberVO memberVO) throws DataAccessException {

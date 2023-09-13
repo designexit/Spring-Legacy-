@@ -1,4 +1,4 @@
-package com.spring.member.service.lsy0913;
+package com.spring.member.service.kmk0913;
 
 import java.util.List;
 
@@ -9,7 +9,8 @@ import com.spring.member.vo.MemberVO;
 // 인터페이스, 앞의 컨트롤러에서 인터페이스 장점등과 같은 이유. 참고.
 public interface MemberService {
 	// 어떤 기능들이 있는지 한눈에 보기 쉽다. 
-	//
+	 public MemberVO getOneMember(String id) throws DataAccessException;
+	 public int updateMember(MemberVO membeVO) throws DataAccessException;
 	 public List listMembers() throws DataAccessException;
 	 public int addMember(MemberVO membeVO) throws DataAccessException;
 	 public int removeMember(String id) throws DataAccessException;

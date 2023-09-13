@@ -44,7 +44,7 @@
 실제 데이터 접근은 sqlsession , mybatis 이용함.  -->
 <!-- 230913 변경함 --> 
 	<bean id="memberDAO"
-		class="com.spring.member.dao.lsy0913.MemberDAOImpl">
+		class="com.spring.member.dao.kmk0913.MemberDAOImpl">
 		<property name="sqlSession" ref="sqlSession"></property>
 	</bean>
 
