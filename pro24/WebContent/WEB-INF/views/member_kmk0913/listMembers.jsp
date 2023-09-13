@@ -22,8 +22,8 @@
       <td><b>이름</b></td>
       <td><b>이메일</b></td>
       <td><b>가입일</b></td>
-      <td><b>수정</b></td>
       <td><b>삭제</b></td>
+      <td><b>수정</b></td>
    </tr>
    
  <c:forEach var="member" items="${membersList}" >     

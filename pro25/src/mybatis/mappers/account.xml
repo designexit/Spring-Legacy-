@@ -10,7 +10,7 @@
          update cust_account
          set balance=balance-5000000
          where
-           accountNo = '70-490-930'
+           accountNo = 70-490-930
        ]]>      
    </update>  
 
@@ -19,7 +19,7 @@
          update cust_account
          set balance=balance+5000000
          where
-          accountNo ='70-490-911'
+          accountNo =70-490-911
        ]]>      
    </update>  
    
