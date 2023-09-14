@@ -13,16 +13,30 @@ import com.spring.member.vo.MemberVO;
 public class MemberDAOImpl implements MemberDAO {
 	@Autowired
 	private SqlSession sqlSession;
-	
-	public void setSqlSession(SqlSession sqlSession) {
-		this.sqlSession = sqlSession;
-	}
 
 	@Override
 	public List selectAllMemberList() throws DataAccessException {
 		List<MemberVO> membersList = null;
 		membersList = sqlSession.selectList("mapper.member.selectAllMemberList");
 		return membersList;
+	}
+
+	// 하나의 정보를 조회 할 때 필요한 메서드 : selectOne, 시스템 메서드
+	// 조건, 첫번째 인자: member.xml 의 sql 문장의 식별 아이디
+	// 두번째 인자: 디비에 넘길 조건 파라미터(문자열), 한 회원의 아이디를 전달.
+	// where id = "여기에 사용될 예정"
+	@Override
+	public MemberVO selectOneMember(String id) throws DataAccessException {
+		MemberVO membervo = null;
+		membervo = (MemberVO) sqlSession.selectOne("mapper.member.selectMemberById", id);
+		return membervo;
+	}
+
+	// 수정 적용하기.
+	@Override
+	public int updateMember(MemberVO memberVO) throws DataAccessException {
+		int result = sqlSession.update("mapper.member.updateMember", memberVO);
+		return result;
 	}
 
 	@Override
@@ -34,18 +48,6 @@ public class MemberDAOImpl implements MemberDAO {
 	@Override
 	public int deleteMember(String id) throws DataAccessException {
 		int result = sqlSession.delete("mapper.member.deleteMember", id);
-		return result;
-	}
-	
-	@Override
-	public MemberVO selectOneMember(String id) throws DataAccessException {
-		 MemberVO membervo = null;
-		 membervo = (MemberVO) sqlSession.selectOne("mapper.member.selectMemberById", id);
-		return membervo;
-	}
-	@Override
-	public int updateMember(MemberVO memberVO) throws DataAccessException {
-		int result = sqlSession.update("mapper.member.updateMember", memberVO);
 		return result;
 	}
 }

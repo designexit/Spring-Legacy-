@@ -173,14 +173,14 @@
 			<version>2.2.2</version>
 			</dependency>
 			
-		<!-- AOP -->
+		<!-- AOP : 보조기능 (한글 설정, 기타 기본 기능+보조기능)-->
 		<dependency>
 		  <groupId>org.springframework</groupId>
 		  <artifactId>spring-aop</artifactId>
 		  <version>${org.springframework-version}</version>
 	  </dependency>
 
-	<!-- AspectJ -->
+	<!-- AspectJ : 보조기능 -->
 	<dependency>
 	    <groupId>org.aspectj</groupId>
 	    <artifactId>aspectjrt</artifactId>

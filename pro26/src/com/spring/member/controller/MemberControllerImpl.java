@@ -34,16 +34,16 @@ public class MemberControllerImpl implements MemberController {
 	}
 
 	@Override
-	@RequestMapping(value = "/member/addMember.do", method = RequestMethod.POST)
-	public ModelAndView addMember(@ModelAttribute("member") MemberVO member, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
-
+	@RequestMapping(value="/member/addMember.do" ,method = RequestMethod.POST)
+	public ModelAndView addMember(@ModelAttribute("member") MemberVO member, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
 		request.setCharacterEncoding("utf-8");
 		int result = 0;
+		System.out.println("뷰로부터 데이터 확인 : member.getId() "+member.getId());
 		result = memberService.addMember(member);
 		ModelAndView mav = new ModelAndView("redirect:/member/listMembers.do");
 		return mav;
-
+		
 	}
 
 	@Override
@@ -72,21 +72,6 @@ public class MemberControllerImpl implements MemberController {
 	}
 	
 	@Override
-	@RequestMapping(value = "/member/updateMember.do", method =  RequestMethod.POST)
-	public ModelAndView updateMember(@ModelAttribute("memberVO") MemberVO memberVO, HttpServletRequest request, HttpServletResponse response) throws Exception {
-		request.setCharacterEncoding("utf-8");
-//		MemberVO memberVO = new MemberVO();
-//		bind(request, memberVO);
-		int result = 0;
-		// 실제 업데이트를 반영하는 로직, 외주주기. 동네 2번 보내기 
-		// 이름 : updateMember
-		result = memberService.updateMember(memberVO);
-		ModelAndView mav = new ModelAndView("redirect:/member/listMembers.do");
-		return mav;
-	}
-	
-
-	@Override
 	@RequestMapping(value = "/member/modMember.do", method =  RequestMethod.GET)
 	public ModelAndView modMember(@RequestParam("id") String id,HttpServletRequest request, HttpServletResponse response) throws Exception {
 
@@ -103,6 +88,23 @@ public class MemberControllerImpl implements MemberController {
 				mav.setViewName(viewName);
 				return mav;
 	}
+	
+	@Override
+	@RequestMapping(value = "/member/updateMember.do", method =  RequestMethod.POST)
+	public ModelAndView updateMember(@ModelAttribute("memberVO") MemberVO memberVO, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("utf-8");
+//		MemberVO memberVO = new MemberVO();
+//		bind(request, memberVO);
+		int result = 0;
+		// 실제 업데이트를 반영하는 로직, 외주주기. 동네 2번 보내기 
+		// 이름 : updateMember
+		result = memberService.updateMember(memberVO);
+		ModelAndView mav = new ModelAndView("redirect:/member/listMembers.do");
+		return mav;
+	}
+	
+
+	
 
 	private String getViewName(HttpServletRequest request) throws Exception {
 		String contextPath = request.getContextPath();

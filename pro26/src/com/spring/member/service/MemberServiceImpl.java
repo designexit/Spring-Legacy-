@@ -17,15 +17,25 @@ public class MemberServiceImpl implements MemberService {
 	@Autowired
 	private MemberDAO memberDAO;
 
-	public void setMemberDAO(MemberDAO memberDAO) {
-		this.memberDAO = memberDAO;
-	}
 
 	@Override
 	public List listMembers() throws DataAccessException {
 		List membersList = null;
 		membersList = memberDAO.selectAllMemberList();
 		return membersList;
+	}
+	
+	@Override
+	public MemberVO getOneMember(String id) throws DataAccessException {
+		MemberVO membervo = null;
+		// 실제 작업, 동네 3번, dao 외주 주기.
+		membervo = memberDAO.selectOneMember(id);
+		return membervo;
+	}
+	
+	@Override
+	public int updateMember(MemberVO memberVO) throws DataAccessException {
+		return memberDAO.updateMember(memberVO);
 	}
 
 	@Override
@@ -38,16 +48,6 @@ public class MemberServiceImpl implements MemberService {
 		return memberDAO.deleteMember(id);
 	}
 
-	@Override
-	public MemberVO getOneMember(String id) throws DataAccessException {
-		MemberVO membervo = null;
-		// 실제 작업, 동네 3번, dao 외주 주기.
-		membervo = memberDAO.selectOneMember(id);
-		return membervo;
-	}
-
-	@Override
-	public int updateMember(MemberVO memberVO) throws DataAccessException {
-		return memberDAO.updateMember(memberVO);
-	}
+	
+	
 }
