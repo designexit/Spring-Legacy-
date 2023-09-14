@@ -2,7 +2,8 @@
 <!DOCTYPE mapper
       PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
+<!-- 동네 4번 , 코드와  sql 문장을 분리해서, 가독성 좋고, 복잡도 줄이고, 분업화, 
+유지보수도 좋다.  -->
 <mapper namespace="mapper.member">
 	<resultMap id="memResult" type="memberVO">
 		<result property="id" column="id" />
@@ -20,7 +21,7 @@
       <result property="joinDate" column="joinDate" />
    </resultMap> -->
 
-
+<!-- 동네 4번의 기능들중 하나 -->
 	<select id="selectAllMemberList" resultMap="memResult">
       <![CDATA[
          select * from t_member	order by joinDate desc	 	
@@ -59,8 +60,8 @@
     
      <insert id="insertMember"  parameterType="memberVO">
 		<![CDATA[
-		 insert into t_member(id,pwd, name, email)
-		 values(#{id}, #{pwd}, #{name}, #{email})
+		 insert into t_member(id,pwd, name, email, joinDate)
+		 values(#{id}, #{pwd}, #{name}, #{email}, sysdate)
 		]]>      
 	</insert>
 	
