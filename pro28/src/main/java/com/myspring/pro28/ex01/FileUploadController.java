@@ -20,26 +20,28 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class FileUploadController  {
-	private static final String CURR_IMAGE_REPO_PATH = "c:\\spring\\image_repo";
+	private static final String CURR_IMAGE_REPO_PATH = "c:\\spring\\image_repo"; // 임시 이미지 파일 저장소
 	@RequestMapping(value="/form")
 	public String form() {
 	    return "uploadForm";
 	  }
 	
 	@RequestMapping(value="/upload",method = RequestMethod.POST)
+	// 일반 데이터 + 파일 데이터를 같이 처리하는 MultipartHttpServletRequest
 	public ModelAndView upload(MultipartHttpServletRequest multipartRequest,HttpServletResponse response)
 	  throws Exception{
+		// 폼에 사용자가 입력한 일반데이터2개와 이미지데이터 여러개 처리 준비
 		multipartRequest.setCharacterEncoding("utf-8");
 		Map map = new HashMap();
 		Enumeration enu=multipartRequest.getParameterNames();
 		while(enu.hasMoreElements()){
-			String name=(String)enu.nextElement();
-			String value=multipartRequest.getParameter(name);
+			String name=(String)enu.nextElement(); //일반 데이터 키 가지고 오기
+			String value=multipartRequest.getParameter(name); // 키에 대응되는 값 불러오기
 			//System.out.println(name+", "+value);
-			map.put(name,value);
+			map.put(name,value); //임시 저장소에 첫번째 일반 데이터 저장
 		}
 		
-		List fileList= fileProcess(multipartRequest);
+		List fileList= fileProcess(multipartRequest); // fileProcess 임의의 메서드. 여기로 이동
 		map.put("fileList", fileList);
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("map", map);
@@ -49,10 +51,12 @@ public class FileUploadController  {
 	
 	private List<String> fileProcess(MultipartHttpServletRequest multipartRequest) throws Exception{
 		List<String> fileList= new ArrayList<String>();
-		Iterator<String> fileNames = multipartRequest.getFileNames();
+		Iterator<String> fileNames = multipartRequest.getFileNames(); //Iterator : 반복처리 도와줌
+		// multipartRequest.getFileNames() : 이미지 파일 이름을 가지고 옴
+		
 		while(fileNames.hasNext()){
 			String fileName = fileNames.next();
-			MultipartFile mFile = multipartRequest.getFile(fileName);
+			MultipartFile mFile = multipartRequest.getFile(fileName); 
 			String originalFileName=mFile.getOriginalFilename();
 			fileList.add(originalFileName);
 			File file = new File(CURR_IMAGE_REPO_PATH +"\\"+ fileName);

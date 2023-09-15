@@ -33,9 +33,9 @@ public class MemberControllerImpl implements MemberController {
 	@Override
 	@RequestMapping(value = "/member/listMembers.do", method = RequestMethod.GET)
 	public ModelAndView listMembers(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String viewName = getViewName(request);
-//		String viewName = (String)request.getAttribute("viewName");
-		// System.out.println("viewName: " +viewName);
+//		String viewName = getViewName(request);
+		String viewName = (String)request.getAttribute("viewName");
+		System.out.println("인터셉터 사용 -> viewName: " +viewName);
 //		logger.info("viewName: "+ viewName);
 //		logger.debug("viewName: "+ viewName);
 		List membersList = memberService.listMembers();
