@@ -16,5 +16,6 @@
 </head>
 <body>
    <h1>메인 페이지입니다!!</h1>
+   <P>  The time on the server is ${serverTime}. </P>
 </body>
 </html>

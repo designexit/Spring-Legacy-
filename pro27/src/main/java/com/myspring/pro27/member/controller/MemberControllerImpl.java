@@ -80,13 +80,16 @@ public class MemberControllerImpl implements MemberController {
 	public ModelAndView login(@ModelAttribute("member") MemberVO member, RedirectAttributes rAttr,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();
+		// 로그인 성공시 해당 유저의 나머지 정보를 다 가지고 옴. 
 		memberVO = memberService.login(member);
+		// memberVO의 박스에 회원정보가 다 있으니 로그인 성공 후 다 가지고 올 수 있다
 		if (memberVO != null) {
 			HttpSession session = request.getSession();
 			session.setAttribute("member", memberVO);
 			session.setAttribute("isLogOn", true);
 			mav.setViewName("redirect:/member/listMembers.do");
 		} else {
+			// 로그인이 안 된 경우, 해당 result라는 키에 값으로 loginFailed문자 띄움
 			rAttr.addAttribute("result", "loginFailed");
 			mav.setViewName("redirect:/member/loginForm.do");
 		}
@@ -107,9 +110,15 @@ public class MemberControllerImpl implements MemberController {
 	@RequestMapping(value = "/member/*Form.do", method = RequestMethod.GET)
 	private ModelAndView form(@RequestParam(value = "result", required = false) String result,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
-		// String viewName = getViewName(request);
-		String viewName = (String) request.getAttribute("viewName");
+		
+		
+		System.out.println("Form.do 실행여부");
+		String viewName = getViewName(request);
+//		String viewName = (String) request.getAttribute("viewName");
+		System.out.println("viewName 실행여부");
 		ModelAndView mav = new ModelAndView();
+		
+		System.out.println("result 실행여부");
 		mav.addObject("result", result);
 		mav.setViewName(viewName);
 		return mav;
