@@ -10,6 +10,7 @@
         <result property="name" column="name" />
         <result property="email" column="email" />
         <result property="joinDate" column="joinDate" />
+        <result property="file" column="file" />
 	</resultMap> 
 	<!-- 
 	<resultMap id="memResult" type="java.util.HashMap">

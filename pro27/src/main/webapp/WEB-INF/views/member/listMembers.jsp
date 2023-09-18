@@ -22,6 +22,7 @@
       <td><b>이름</b></td>
       <td><b>이메일</b></td>
       <td><b>가입일</b></td>
+      <td><b>프로필 이미지</b></td>
       <td><b>삭제</b></td>
       <td><b>수정</b></td>
    </tr>
@@ -33,6 +34,7 @@
       <td>${member.name}</td>
       <td>${member.email}</td>
       <td>${member.joinDate}</td>
+      <td>${member.file}</td>
       <td><a href="${contextPath}/member/removeMember.do?id=${member.id }">삭제하기</a></td>
       <td><a href="${contextPath}/member/modMember.do?id=${member.id }">수정하기</a></td>
     </tr>
