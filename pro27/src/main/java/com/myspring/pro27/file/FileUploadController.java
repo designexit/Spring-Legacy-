@@ -20,8 +20,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class FileUploadController  {
-	//private static final String CURR_IMAGE_REPO_PATH = "c:\\spring\\image_repo"; // 임시 이미지 파일 저장소
-		private static final String CURR_IMAGE_REPO_PATH = "/Users/minkyoungkim/upload"; // 임시 이미지 파일 저장소
+	private static final String CURR_IMAGE_REPO_PATH = "c:\\spring\\image_repo"; // 임시 이미지 파일 저장소
+//		private static final String CURR_IMAGE_REPO_PATH = "/Users/minkyoungkim/upload"; // 임시 이미지 파일 저장소
 	@RequestMapping(value="/form")
 	public String form() {
 	    return "uploadForm";

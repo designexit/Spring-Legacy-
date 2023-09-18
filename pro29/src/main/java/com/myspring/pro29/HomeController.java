@@ -43,7 +43,9 @@ public class HomeController {
 	
 	
 	  @RequestMapping(value = "/", method = RequestMethod.GET) public String
-	  home(Locale locale, Model model) 
-	  { return "JSONTest"; }
+	  home(Locale locale, Model model) { 
+//		  return "JSONTest";  //기존 뷰 변경
+		  return "JSONTest3"; 
+	  }
 	 
 }

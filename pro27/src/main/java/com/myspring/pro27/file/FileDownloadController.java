@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class FileDownloadController {
 	// 다운로드 위치, 파일 이미지 메모리에 읽어서 출력. 웹브라우저에....
 	// c:\\임시저장소
-//	private static String CURR_IMAGE_REPO_PATH = "c:\\spring\\image_repo";
-	private static String CURR_IMAGE_REPO_PATH = "/Users/minkyoungkim/upload";
+	private static String CURR_IMAGE_REPO_PATH = "c:\\spring\\image_repo";
+//	private static String CURR_IMAGE_REPO_PATH = "/Users/minkyoungkim/upload";
 
 	@RequestMapping("/download")
 	//imageFileName : 업로드 후 추가한 이미지들의 파일 이름
