@@ -4,6 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>    
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
+<c:set var="passwordCheck2" value="${passwordCheck }" />
 <%
   request.setCharacterEncoding("UTF-8");
 %> 
@@ -12,6 +13,33 @@
 <meta charset="UTF-8">
  <script src="//code.jquery.com/jquery-3.3.1.js"></script> 
 <script type="text/javascript">
+ 
+var checkPwd = 0 
+
+
+function checkSubmit() {
+	if(checkPwd ==1) {
+		document.getElementById('frmReply').submit();
+	} else {
+		alert("패스워드 확인 해주세요")
+		checkPwd = 0
+		document.getElementById('inputPassword').focus()
+		return false;
+	}
+}
+
+function passwordConfirm(password){
+	alert("password 전달여부 확인 : " + password)
+	alert("${member.pwd} 전달여부 확인 : " + ${member.pwd})
+
+	if(password == ${member.pwd}){
+		checkPwd = 1
+		alert("password 일치합니다.")
+	} else {
+		alert("password 불일치합니다.")
+	}
+	
+}
 
  function backToList(obj){
  obj.action="${contextPath}/board/listArticles.do";
@@ -34,11 +62,11 @@
 
 <body>
  <h1>답글쓰기</h1>
-  <form name="frmReply" method="post"  action="${contextPath}/board/addReply.do"   enctype="multipart/form-data">
+  <form name="frmReply" method="post"  action="${contextPath}/board/addReply.do?${articleNO=4}"   enctype="multipart/form-data">
     <table>
     <tr>
 			<td align="right"> 작성자:&nbsp; </td>
-			<td><input type="text" size="20" maxlength="100"  name="writer"></input> </td>
+			<td><input type="text" size="20" maxlength="100"  name="writer" value="${member.id}" disabled></input> </td>
 		</tr>
 		<tr>
 			<td align="right">제목:&nbsp;  </td>
@@ -50,7 +78,10 @@
 		</tr>
 		<tr>
 			<td align="right">비밀번호:&nbsp;  </td>
-			<td><input type="password" size="10" maxlength="12" name="passwd"> </input> </td>
+			<td>
+				<input id ="inputPassword" type="password" size="10" maxlength="12" name="passwd"> </input> 
+				<input type=button value="비밀번호 확인" onClick="passwordConfirm(inputPassword.value)" />
+			</td>
 		</tr>
 		<tr>
 			<td align="right">이미지파일 첨부:  </td>
