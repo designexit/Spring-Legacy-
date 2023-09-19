@@ -29,8 +29,8 @@ function checkSubmit() {
 }
 
 function passwordConfirm(password){
-	alert("password 전달여부 확인 : " + password)
-	alert("${member.pwd} 전달여부 확인 : " + ${member.pwd})
+	/* alert("password 전달여부 확인 : " + password)
+	alert("${member.pwd} 전달여부 확인 : " + ${member.pwd}) */
 
 	if(password == ${member.pwd}){
 		checkPwd = 1

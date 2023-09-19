@@ -33,6 +33,16 @@ public class BoardDAOImpl implements BoardDAO {
 		sqlSession.insert("mapper.board.insertNewArticle",articleMap);
 		return articleNO;
 	}
+	
+	// 단일 이미지 답글쓰기
+		@Override
+		public int insertReplyNewArticle(Map articleMap) throws DataAccessException {
+			// 현재 게시글의 갯수를 나타냄
+			int articleNO = selectNewArticleNO();
+			articleMap.put("articleNO", articleNO);
+			sqlSession.insert("mapper.board.insertReplyNewArticle",articleMap);
+			return articleNO;
+		}
     
 	//���� ���� ���ε�
 	/*

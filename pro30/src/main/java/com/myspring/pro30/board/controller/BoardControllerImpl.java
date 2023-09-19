@@ -94,7 +94,7 @@ public class BoardControllerImpl  implements BoardController{
 		String id = memberVO.getId();
 		// articleMap 부모글 번호 기본 0으로 설정
 		articleMap.put("parentNO", 0);
-		// 로그인한 회원 아니디
+		// 로그인한 회원 아이디
 		articleMap.put("id", id);
 		// 게시글 첨부된 이미지 파일 이름
 		articleMap.put("imageFileName", imageFileName);
@@ -146,7 +146,49 @@ public class BoardControllerImpl  implements BoardController{
 	}
 	
 	
-	
+	/*
+	 * // 답글쓰기, 단일 이미지 업로드
+	 * 
+	 * @Override
+	 * 
+	 * @RequestMapping(value="/board/addNewArticle.do" ,method = RequestMethod.POST)
+	 * 
+	 * @ResponseBody public ResponseEntity
+	 * replyNewArticle(MultipartHttpServletRequest multipartRequest,
+	 * HttpServletResponse response) throws Exception {
+	 * multipartRequest.setCharacterEncoding("utf-8"); Map<String,Object> articleMap
+	 * = new HashMap<String, Object>(); Enumeration
+	 * enu=multipartRequest.getParameterNames(); while(enu.hasMoreElements()){
+	 * String name=(String)enu.nextElement(); String
+	 * value=multipartRequest.getParameter(name); articleMap.put(name,value); }
+	 * 
+	 * String imageFileName= upload(multipartRequest); HttpSession session =
+	 * multipartRequest.getSession(); MemberVO memberVO = (MemberVO)
+	 * session.getAttribute("member"); String id = memberVO.getId();
+	 * articleMap.put("parentNO", 0); articleMap.put("id", id);
+	 * articleMap.put("imageFileName", imageFileName);
+	 * 
+	 * String message; ResponseEntity resEnt=null; HttpHeaders responseHeaders = new
+	 * HttpHeaders(); responseHeaders.add("Content-Type",
+	 * "text/html; charset=utf-8"); try { int articleNO =
+	 * boardService.addNewArticle(articleMap); if(imageFileName!=null &&
+	 * imageFileName.length()!=0) { File srcFile = new
+	 * File(ARTICLE_IMAGE_REPO+"\\"+"temp"+"\\"+imageFileName); File destDir = new
+	 * File(ARTICLE_IMAGE_REPO+"\\"+articleNO);
+	 * FileUtils.moveFileToDirectory(srcFile, destDir,true); }
+	 * 
+	 * message = "<script>"; message += " alert('글쓰기 성공!');"; message +=
+	 * " location.href='"+multipartRequest.getContextPath()
+	 * +"/board/listArticles.do'; "; message +=" </script>"; resEnt = new
+	 * ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+	 * }catch(Exception e) { // 오류 발생시 임시 저장소를 삭제를 하고 File srcFile = new
+	 * File(ARTICLE_IMAGE_REPO+"\\"+"temp"+"\\"+imageFileName); srcFile.delete(); //
+	 * 메세지 글쓰기 작성 오류 message = " <script>"; message +=" alert('글쓰기 작성 오류');";
+	 * message +=" location.href='"+multipartRequest.getContextPath()
+	 * +"/board/articleForm.do'; "; message +=" </script>"; resEnt = new
+	 * ResponseEntity(message, responseHeaders, HttpStatus.CREATED);
+	 * e.printStackTrace(); } return resEnt; }
+	 */
 	
 	
 	//상세페이지 조회
