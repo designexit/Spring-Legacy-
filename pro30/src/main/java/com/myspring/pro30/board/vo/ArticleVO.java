@@ -19,7 +19,7 @@ public class ArticleVO {
 	
 	
 	public ArticleVO() {
-		System.out.println("ArticleVO ������");
+		System.out.println("ArticleVO 생성");
 	}
 
 	public int getArticleNO() {
@@ -70,6 +70,7 @@ public class ArticleVO {
 	public void setImageFileName(String imageFileName) {
 		try {
 			if(imageFileName!= null && imageFileName.length()!=0) {
+				// 이미지 파일 이름을 utf-8로 인코딩
 				this.imageFileName = URLEncoder.encode(imageFileName,"UTF-8");
 			}
 		} catch (UnsupportedEncodingException e) {

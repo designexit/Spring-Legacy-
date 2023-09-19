@@ -39,6 +39,7 @@
 		]]>      
 	</insert>
 	
+	
   <select id="selectNewArticleNO" resultType="int"  >
 		<![CDATA[
 			SELECT  max(articleNO)+1 from t_board		

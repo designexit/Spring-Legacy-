@@ -18,6 +18,9 @@
   <title>글목록창</title>
 </head>
 <script>
+/* 매개변수가 3개이고 첫번째 로그인 했을 경우를 알려주는 상태변수
+2번째 로그인 시 이동할 페이지
+3번째 로그인 안했을 시 이동할 페이지 */
 	function fn_articleForm(isLogOn,articleForm,loginForm){
 	  if(isLogOn != '' && isLogOn != 'false'){
 	    location.href=articleForm;
@@ -35,6 +38,10 @@
      <td >제목</td>
      <td >작성일</td>
   </tr>
+  <!-- 게시글이 있다면 -->
+  <!-- varStatus 인덱스와 비슷한데 갯수를 1부터 숫자세기 용도 -->
+  <!-- article.level 클수록 하위 계층으로 가고 0이 부모글, 레벨1, 예) 게시글의 0 -> 1번 답변글, 레벨 1-> 1번 답변 답변글 2 -->
+  <!-- 클라이언트 목록에서 해당 게시글의 제목을 클릭 시 이동할 링크에 파라미터로 전달 -->
 <c:choose>
   <c:when test="${articlesList ==null }" >
     <tr  height="10">
@@ -45,6 +52,7 @@
       </td>  
     </tr>
   </c:when>
+  
   <c:when test="${articlesList !=null }" >
     <c:forEach  var="article" items="${articlesList }" varStatus="articleNum" >
      <tr align="center">
@@ -52,7 +60,7 @@
 	<td width="10%">${article.id }</td>
 	<td align='left'  width="35%">
 	  <span style="padding-right:30px"></span>
-	   <c:choose>
+	   <c:choose>   
 	      <c:when test='${article.level > 1 }'>  
 	         <c:forEach begin="1" end="${article.level }" step="1">
 	              <span style="padding-left:20px"></span>    

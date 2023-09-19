@@ -24,16 +24,17 @@ public class BoardDAOImpl implements BoardDAO {
 		return articlesList;
 	}
 
-	
+	// 단일 이미지 글쓰기
 	@Override
 	public int insertNewArticle(Map articleMap) throws DataAccessException {
+		// 현재 게시글의 갯수를 나타냄
 		int articleNO = selectNewArticleNO();
 		articleMap.put("articleNO", articleNO);
 		sqlSession.insert("mapper.board.insertNewArticle",articleMap);
 		return articleNO;
 	}
     
-	//���� ���� ���ε�
+	//���� ���� ���ε�
 	/*
 	@Override
 	public void insertNewImage(Map articleMap) throws DataAccessException {
@@ -49,6 +50,7 @@ public class BoardDAOImpl implements BoardDAO {
 	
    */
 	
+	//게시글 번호, 게시글 정보 하나 가져오기
 	@Override
 	public ArticleVO selectArticle(int articleNO) throws DataAccessException {
 		return sqlSession.selectOne("mapper.board.selectArticle", articleNO);
@@ -72,6 +74,8 @@ public class BoardDAOImpl implements BoardDAO {
 		return imageFileList;
 	}
 	
+	// 게시글의 갯수를 파악하는 디비
+	// 다음 게시글 번호
 	private int selectNewArticleNO() throws DataAccessException {
 		return sqlSession.selectOne("mapper.board.selectNewArticleNO");
 	}
