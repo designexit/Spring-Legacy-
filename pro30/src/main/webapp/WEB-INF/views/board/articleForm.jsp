@@ -13,32 +13,74 @@
 <title>글쓰기창</title>
 <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
-   function readURL(input) {
-      if (input.files && input.files[0]) {
+/* 최초에 글쓰기 시 파일 추가 할 때 먼저 보이는 프리 뷰 화면은 cnt1으로 고정하고,
+추가로 파일 첨부시 보이는 프리 뷰 화면의 아이디는 하나씩 증가 하게끔 cnt2 으로 설정.  
+cnt 변수는 기존 파일 추가시 file1,file2 이런 형식으로 추가하게끔.
+*/
+
+/* 추가0 */
+var cnt=1;
+var cnt1=0; 
+var cnt2=0;
+function readURL(input) {
+    if (input.files && input.files[0]) {
 	      var reader = new FileReader();
+	     
 	      reader.onload = function (e) {
-	        $('#preview').attr('src', e.target.result);
-          }
-         reader.readAsDataURL(input.files[0]);
-      }
-  }  
+	        $('#previewFirst').attr('src', e.target.result);
+	        /* console.log('readAsDataURL 호출 여부 확인'+reader.readAsDataURL(input.files[0])) */
+        }
+       reader.readAsDataURL(input.files[0]);
+       
+    }
+} 
+/* 테스트 -> 파일 추가시 동적으로 할당 되게끔 함수를 조정. cnt 라는 변수를 추가해서 
+ * 해당 아이디 부분을 숫자 증가하게끔해서 아이디를 구분 하게끔했음. 
+ */
+ /* 추가1 */
+function readURL2(input) {
+	  console.log('readURL2 호출 여부 확인')
+    if (input.files && input.files[0]) {
+	      var reader = new FileReader();
+	     
+	      reader.onload = function (e) {
+	    	  console.log('preview 호출 전 cnt2 : '+ cnt2)
+	        $('#preview'+cnt1).attr('src', e.target.result);
+	    	  cnt1++;
+	    	  console.log('preview 호출 후 cnt2 : '+ cnt2)
+        }
+       reader.readAsDataURL(input.files[0]);
+    }
+} 
   function backToList(obj){
     obj.action="${contextPath}/board/listArticles.do";
     obj.submit();
   }
   
-  var cnt=1;
-  function fn_addFile(){
+  /* 기존 */
+/*   function fn_addFile(){
 	  $("#d_file").append("<br>"+"<input type='file' name='file"+cnt+"' />");
 	  cnt++;
+  }   */
+  /* 추가2 */
+  function fn_addFile(){
+	  $("#d_file").append("<br>"+"<input type='file' name='file"+cnt+"+"+"' onchange="+"readURL2(this); />");
+	  
+	  cnt++;
+	   $("#previews").append("<br>"+"<img id='preview"+cnt2+"' src='#'"+ "width=200 height=200 />");
+	  /* <td> <input type="file" name="imageFileName"  onchange="readURL(this);" /></td>
+	  <td><img  id="preview" src="#"   width=200 height=200/></td> */
+	   cnt2++;
+	  console.log(cnt2);
   }  
+
 
 </script>
  <title>글쓰기창</title>
 </head>
 <body>
 <h1 style="text-align:center">글쓰기</h1>
-  <form name="articleForm" method="post"   action="${contextPath}/board/addNewArticle.do"   enctype="multipart/form-data">
+  <form name="articleForm" method="post"   action="${contextPath}/board/addMultiImageNewArticle.do"   enctype="multipart/form-data">
     <table border="0" align="center">
       <tr>
 					<td align="right"> 작성자</td>
@@ -54,17 +96,18 @@
      </tr>
      <tr>
 			  <td align="right">이미지파일 첨부:  </td>
-			  <td> <input type="file" name="imageFileName"  onchange="readURL(this);" /></td>
-			  <td><img  id="preview" src="#"   width=200 height=200/></td>
+			  <!-- 추가3 -->
+			  <td align="left"> <input type="button" value="파일 추가" onClick="fn_addFile()"/></td>
+			  <!-- <td> <input type="file" name="imageFileName"  onchange="readURL(this);" /></td> -->
+			  <!-- <td><img  id="preview" src="#"   width=200 height=200/></td> -->
 			  
-			  
-			  <td align="right">이미지파일 첨부</td>
-				<td align="left"> <input type="button" value="파일 추가" onClick="fn_addFile()"/></td>
-				
-				
 	   </tr>
 	   <tr>
+	   <!-- 여기에 파일이 추가 되는 태그가 첨부되는 자리 -->
 	      <td colspan="4"><div id="d_file"></div></td>
+	      <!-- 추가4 -->
+	      <!-- 첨부된 이미지를 불러오는 영역 -->
+	       <td colspan="4"><div id="previews"></div></td>
 	   </tr>
 	    <tr>
 	      <td align="right"> </td>

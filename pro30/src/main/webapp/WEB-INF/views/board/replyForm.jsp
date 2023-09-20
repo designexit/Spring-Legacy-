@@ -62,15 +62,19 @@ function passwordConfirm(password){
 
 <body>
  <h1>답글쓰기</h1>
-  <form name="frmReply" method="post"  action="${contextPath}/board/addReply.do?${articleNO=4}"   enctype="multipart/form-data">
+  <form name="frmReply" method="post"  action="${contextPath}/board/addReply.do"   enctype="multipart/form-data">
+  <%-- <form name="frmReply" method="post"  action="${contextPath}/board/addReply.do"   enctype="multipart/form-data"> --%>
     <table>
     <tr>
 			<td align="right"> 작성자:&nbsp; </td>
-			<td><input type="text" size="20" maxlength="100"  name="writer" value="${member.id}" disabled></input> </td>
+			<td><input type="text" size="20" maxlength="100"  name="writer" value=${member.id} readOnly></input> </td>
 		</tr>
 		<tr>
 			<td align="right">제목:&nbsp;  </td>
-			<td><input type="text" size="67"  maxlength="500" name="title"> </input></td>
+			<td><input type="text" size="67"  maxlength="500" name="title" > </input></td>
+			<!-- 서버에, 부모의 게시글 번호를 전달하는 방식을 , 타입을 히든으로 숨겨서, 서버에게 전달
+			서버에서, public ResponseEntity replyNewArticle(@RequestParam("parentNO") int parentNO,MultipartHttpServletRequest multipartRequest, -->
+			<td><input type="hidden" size="67"  maxlength="500" name="parentNO" value="${parentNO}" > </input></td>
 		</tr>
 		<tr>
 			<td align="right" valign="top"><br>내용:&nbsp; </td>
@@ -78,10 +82,9 @@ function passwordConfirm(password){
 		</tr>
 		<tr>
 			<td align="right">비밀번호:&nbsp;  </td>
-			<td>
-				<input id ="inputPassword" type="password" size="10" maxlength="12" name="passwd"> </input> 
-				<input type=button value="비밀번호 확인" onClick="passwordConfirm(inputPassword.value)" />
-			</td>
+			<td><input id ="inputPassword" type="password" size="10" maxlength="12" name="passwd"> </input> </td>
+			<td><input type=button value="패스워드확인"onClick="passwordConfirm(inputPassword.value)" /></td>
+			
 		</tr>
 		<tr>
 			<td align="right">이미지파일 첨부:  </td>
@@ -91,7 +94,8 @@ function passwordConfirm(password){
 		<tr>
 			<td align="right"> </td>
 			<td>
-				<input type=submit value="답글쓰기" />
+				<input id="submitBtn" type=submit value="답글쓰기" onClick="return checkSubmit()" />
+				<!-- <input type=submit value="답글쓰기" /> -->
 				<input type=button value="취소"onClick="backToList(this.form)" />
 				
 			</td>
